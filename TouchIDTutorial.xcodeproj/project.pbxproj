@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		8698DD971BBC2D63005F3CA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8698DD961BBC2D63005F3CA6 /* AppDelegate.swift */; };
-		8698DD991BBC2D63005F3CA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8698DD981BBC2D63005F3CA6 /* ViewController.swift */; };
+		8698DD991BBC2D63005F3CA6 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8698DD981BBC2D63005F3CA6 /* AuthenticationViewController.swift */; };
 		8698DD9C1BBC2D63005F3CA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8698DD9A1BBC2D63005F3CA6 /* Main.storyboard */; };
 		8698DD9E1BBC2D63005F3CA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8698DD9D1BBC2D63005F3CA6 /* Assets.xcassets */; };
 		8698DDA11BBC2D63005F3CA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8698DD9F1BBC2D63005F3CA6 /* LaunchScreen.storyboard */; };
+		8698DDA91BBC2F00005F3CA6 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8698DDA81BBC2F00005F3CA6 /* LocalAuthentication.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8698DD931BBC2D63005F3CA6 /* TouchIDTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchIDTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8698DD961BBC2D63005F3CA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8698DD981BBC2D63005F3CA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8698DD981BBC2D63005F3CA6 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		8698DD9B1BBC2D63005F3CA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8698DD9D1BBC2D63005F3CA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8698DDA01BBC2D63005F3CA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8698DDA21BBC2D63005F3CA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8698DDA81BBC2F00005F3CA6 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +31,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8698DDA91BBC2F00005F3CA6 /* LocalAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86334D101BBC41B7004B73E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8698DDA81BBC2F00005F3CA6 /* LocalAuthentication.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8698DD8A1BBC2D63005F3CA6 = {
 			isa = PBXGroup;
 			children = (
@@ -54,8 +65,9 @@
 		8698DD951BBC2D63005F3CA6 /* TouchIDTutorial */ = {
 			isa = PBXGroup;
 			children = (
+				86334D101BBC41B7004B73E0 /* Frameworks */,
 				8698DD961BBC2D63005F3CA6 /* AppDelegate.swift */,
-				8698DD981BBC2D63005F3CA6 /* ViewController.swift */,
+				8698DD981BBC2D63005F3CA6 /* AuthenticationViewController.swift */,
 				8698DD9A1BBC2D63005F3CA6 /* Main.storyboard */,
 				8698DD9D1BBC2D63005F3CA6 /* Assets.xcassets */,
 				8698DD9F1BBC2D63005F3CA6 /* LaunchScreen.storyboard */,
@@ -134,7 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8698DD991BBC2D63005F3CA6 /* ViewController.swift in Sources */,
+				8698DD991BBC2D63005F3CA6 /* AuthenticationViewController.swift in Sources */,
 				8698DD971BBC2D63005F3CA6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +295,7 @@
 				8698DDA71BBC2D63005F3CA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
