@@ -25,7 +25,7 @@ class AuthenticationViewController: UIViewController {
         
         // 2. Check if the device has a fingerprint sensor
         // If not, show the user an alert view and bail out!
-        guard authenticationContext.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) else {
+        guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
             
             showAlertViewIfNoBiometricSensorHasBeenDetected()
             return
@@ -34,7 +34,7 @@ class AuthenticationViewController: UIViewController {
         
         // 3. Check the fingerprint
         authenticationContext.evaluatePolicy(
-            .DeviceOwnerAuthenticationWithBiometrics,
+            .deviceOwnerAuthenticationWithBiometrics,
             localizedReason: "Only awesome people are allowed",
             reply: { [unowned self] (success, error) -> Void in
                 
@@ -49,8 +49,8 @@ class AuthenticationViewController: UIViewController {
                 // Check if there is an error
                 if let error = error {
                     
-                    let message = self.errorMessageForLAErrorCode(error.code)
-                    self.showAlertViewAfterEvaluatingPolicyWithMessage(message)
+                    let message = self.errorMessageForLAErrorCode(errorCode: error._code)
+                    self.showAlertViewAfterEvaluatingPolicyWithMessage(message: message)
                     
                 }
                 
@@ -65,7 +65,7 @@ class AuthenticationViewController: UIViewController {
     */
     func showAlertViewIfNoBiometricSensorHasBeenDetected(){
         
-        showAlertWithTitle("Error", message: "This device does not have a TouchID sensor.")
+        showAlertWithTitle(title: "Error", message: "This device does not have a TouchID sensor.")
         
     }
     
@@ -77,7 +77,7 @@ class AuthenticationViewController: UIViewController {
     */
     func showAlertViewAfterEvaluatingPolicyWithMessage( message:String ){
         
-        showAlertWithTitle("Error", message: message)
+        showAlertWithTitle(title: "Error", message: message)
         
     }
 
@@ -90,17 +90,25 @@ class AuthenticationViewController: UIViewController {
     */
     func showAlertWithTitle( title:String, message:String ) {
      
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertVC.addAction(okAction)
         
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//
+//            self.presentViewController(alertVC, animated: true, completion: nil)
+//
+//        }
         
-            self.presentViewController(alertVC, animated: true, completion: nil)
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Download file or perform expensive task
             
+            DispatchQueue.main.async {
+                // Update the UI
+                self.present(alertVC, animated: true, completion: nil)
+            }
         }
-        
     }
     
     /**
@@ -117,31 +125,31 @@ func errorMessageForLAErrorCode( errorCode:Int ) -> String{
     
     switch errorCode {
         
-    case LAError.AppCancel.rawValue:
+    case LAError.appCancel.rawValue:
         message = "Authentication was cancelled by application"
         
-    case LAError.AuthenticationFailed.rawValue:
+    case LAError.authenticationFailed.rawValue:
         message = "The user failed to provide valid credentials"
         
-    case LAError.InvalidContext.rawValue:
+    case LAError.invalidContext.rawValue:
         message = "The context is invalid"
         
-    case LAError.PasscodeNotSet.rawValue:
+    case LAError.passcodeNotSet.rawValue:
         message = "Passcode is not set on the device"
         
-    case LAError.SystemCancel.rawValue:
+    case LAError.systemCancel.rawValue:
         message = "Authentication was cancelled by the system"
         
-    case LAError.TouchIDLockout.rawValue:
+    case LAError.touchIDLockout.rawValue:
         message = "Too many failed attempts."
         
-    case LAError.TouchIDNotAvailable.rawValue:
+    case LAError.touchIDNotAvailable.rawValue:
         message = "TouchID is not available on the device"
         
-    case LAError.UserCancel.rawValue:
+    case LAError.userCancel.rawValue:
         message = "The user did cancel"
         
-    case LAError.UserFallback.rawValue:
+    case LAError.userFallback.rawValue:
         message = "The user chose to use the fallback"
         
     default:
@@ -158,12 +166,21 @@ func errorMessageForLAErrorCode( errorCode:Int ) -> String{
     */
     func navigateToAuthenticatedViewController(){
         
-        if let loggedInVC = storyboard?.instantiateViewControllerWithIdentifier("LoggedInViewController") {
+        if let loggedInVC = storyboard?.instantiateViewController(withIdentifier: "LoggedInViewController") {
             
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//
+//                navigationController?.pushViewController(loggedInVC, animated: true)
+//
+//            }
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                // Download file or perform expensive task
                 
-                navigationController?.pushViewController(loggedInVC, animated: true)
-                
+                DispatchQueue.main.async {
+                    // Update the UI
+                     self.navigationController?.pushViewController(loggedInVC, animated: true)
+                }
             }
             
         }
